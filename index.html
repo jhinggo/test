@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Introduction to Computing Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #a2cffe; /* Pastel blue */
+    background-image: radial-gradient(circle, #a2cffe, #86a8e7, #7f7fd5); /* Gradient effect */
+    position: relative;
+    overflow: hidden; /* Hide overflowing stars */
+}
+
+.mySlides {
+    display: none;
+}
+
+/* Star styles */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: twinkle 1s infinite alternate;
+}
+
+/* Animation for twinkling effect */
+@keyframes twinkle {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+ 
+    <div class="w3-dropdown-hover w3-hide-small" id="dropdownContainer">
+        <button class="w3-padding-large w3-button" title="More">Assignments<i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4" id="dropdownContent">
+            <a href="SayHello.html" class="w3-bar-item w3-button">Say Hello</a>
+            <a href="add_2_numbers.html" class="w3-bar-item w3-button">Add 2 Numbers</a>
+            <a href="gradecomputation.html" class="w3-bar-item w3-button">Grade Computation</a>
+            <a href="Assignment1.html" class="w3-bar-item w3-button">Assignment #1: Conversion</a>
+            <a href="Assignment2.html" class="w3-bar-item w3-button">Assignment #2: Calculator</a>
+            <a href="Assignment3.html" class="w3-bar-item w3-button">Assignment #3: Loop</a>
+            <a href="Assignment4.html" class="w3-bar-item w3-button">Assignment #4: Simple Payroll</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">The Course</a>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+   <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h2 class="w3-wide">CS 1130 - Introduction to Computing</h2>
+     <p class="w3-opacity"><i> <bold> by Jhero M. Hinggo - Student</bold></i></p>
+     <br>
+     <h2>
+     Student Assignments:  
+     </h2>
+      <br>
+      <h3>Assignment #1 - Conversion (Celsius to Fahrenheit, Fahrenheit to Celsius, Meters to Feet, Feet to Meters)</h3>
+      <h3>Assignment #2 - Income Tax Calculator </h3>
+      <h3>Assignment #3 - Factorial (While Loop), Sum (Do While Loop) and Average (For Loop) of First N Natural Numbers</h3>
+      <h3>Assignment #4 - Simple Payroll </h3>
+
+      <br>
+      <h2>*** All Assignments are Due on <strong>DECEMBER 11, 2023</strong> *** </h2>
+      <h4> Upload and launch the pages in your specified GitHub or W3Spaces website. </h4>
+  </div>
+
+<!-- End Page Content -->
+</div>
+
+<script>
+// Function to create stars
+function createStars() {
+    const starsContainer = document.body;
+    const numberOfStars = 50;
+
+    for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        starsContainer.appendChild(star);
+    }
+}
+
+// Call the function to create stars
+createStars();
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
