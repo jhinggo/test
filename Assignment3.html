@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Numbers Calculation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #a2cffe; /* Pastel blue */
+            background-image: radial-gradient(circle, #a2cffe, #86a8e7, #7f7fd5); /* Gradient effect */
+            position: relative;
+            overflow: hidden; /* Hide overflowing stars */
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input {
+            padding: 5px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stars -->
+    <script>
+        // Function to create stars
+        function createStars() {
+            const starsContainer = document.body;
+            const numberOfStars = 50;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Call the function to create stars
+        createStars();
+    </script>
+
+    <h2>Natural Numbers Calculation</h2>
+
+    <label for="numberN">Enter a positive integer (N):</label>
+    <input type="number" id="numberN" placeholder="Enter N">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h3>Results:</h3>
+    <p id="factorialResult"></p>
+    <p id="sumResult"></p>
+    <p id="averageResult"></p>
+
+    <a href="index.html">Back to Home Page</a>
+
+    <script>
+        function calculate() {
+            var N = parseInt(document.getElementById("numberN").value);
+
+            // Calculate factorial using while loop
+            var factorial = 1;
+            var i = 1;
+            while (i <= N) {
+                factorial *= i;
+                i++;
+            }
+            document.getElementById("factorialResult").innerHTML = "Factorial: " + factorial;
+
+            // Calculate sum using do-while loop
+            var sum = 0;
+            var j = 1;
+            do {
+                sum += j;
+                j++;
+            } while (j <= N);
+            document.getElementById("sumResult").innerHTML = "Sum: " + sum;
+
+            // Calculate average using for loop
+            var average = 0;
+            for (var k = 1; k <= N; k++) {
+                average += k;
+            }
+            average /= N;
+            document.getElementById("averageResult").innerHTML = "Average: " + average;
+        }
+    </script>
+
+</body>
+</html>
