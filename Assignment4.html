@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Program</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #a2cffe; /* Pastel blue */
+            background-image: radial-gradient(circle, #a2cffe, #86a8e7, #7f7fd5); /* Gradient effect */
+            position: relative;
+            overflow: hidden; /* Hide overflowing stars */
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        label {
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        input {
+            padding: 5px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            display: block; /* Make it a block element to control margins */
+            margin-top: 20px; /* Add margin to move it downwards */
+        }
+
+        /* Star styles */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        /* Animation for twinkling effect */
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stars -->
+    <script>
+        // Function to create stars
+        function createStars() {
+            const starsContainer = document.body;
+            const numberOfStars = 50;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Call the function to create stars
+        createStars();
+    </script>
+
+    <h2>Payroll Program</h2>
+
+    <label for="employeeName">Employee Name:</label>
+    <input type="text" id="employeeName" placeholder="Enter employee name">
+
+    <label for="daysWorked">Days Worked:</label>
+    <input type="number" id="daysWorked" placeholder="Enter days worked">
+
+    <label for="dailyRate">Daily Rate:</label>
+    <input type="number" id="dailyRate" placeholder="Enter daily rate">
+
+    <label for="deductionAmount">Deduction Amount:</label>
+    <input type="number" id="deductionAmount" placeholder="Enter deduction amount">
+
+    <button onclick="addEmployee()">Add Employee</button>
+
+    <table id="payrollTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Employee Name</th>
+                <th>Days Worked</th>
+                <th>Daily Rate (PHP)</th>
+                <th>Gross Pay (PHP)</th>
+                <th>Deduction Amount (PHP)</th>
+                <th>Net Pay (PHP)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <a href="index.html">Back to Home Page</a>
+
+    <script>
+        let payrollList = [];
+
+        function addEmployee() {
+            const employeeName = document.getElementById("employeeName").value;
+            const daysWorked = parseInt(document.getElementById("daysWorked").value);
+            const dailyRate = parseFloat(document.getElementById("dailyRate").value);
+            const deductionAmount = parseFloat(document.getElementById("deductionAmount").value);
+
+            if (!employeeName || isNaN(daysWorked) || isNaN(dailyRate) || isNaN(deductionAmount)) {
+                alert("Please enter valid inputs.");
+                return;
+            }
+
+            const grossPay = daysWorked * dailyRate;
+            const netPay = grossPay - deductionAmount;
+
+            const employee = {
+                employeeName,
+                daysWorked,
+                dailyRate,
+                grossPay,
+                deductionAmount,
+                netPay,
+            };
+
+            payrollList.push(employee);
+            updateTable();
+            clearInputs();
+        }
+
+        function deleteEmployee(index) {
+            payrollList.splice(index, 1);
+            updateTable();
+        }
+
+        function updateTable() {
+            const tableBody = document.querySelector("#payrollTable tbody");
+            tableBody.innerHTML = "";
+
+            payrollList.forEach((employee, index) => {
+                const row = tableBody.insertRow();
+                const cellNo = row.insertCell(0);
+                const cellEmployeeName = row.insertCell(1);
+                const cellDaysWorked = row.insertCell(2);
+                const cellDailyRate = row.insertCell(3);
+                const cellGrossPay = row.insertCell(4);
+                const cellDeductionAmount = row.insertCell(5);
+                const cellNetPay = row.insertCell(6);
+                const cellAction = row.insertCell(7);
+
+                cellNo.textContent = index + 1;
+                cellEmployeeName.textContent = employee.employeeName;
+                cellDaysWorked.textContent = employee.daysWorked;
+                cellDailyRate.textContent = formatCurrency(employee.dailyRate);
+                cellGrossPay.textContent = formatCurrency(employee.grossPay);
+                cellDeductionAmount.textContent = formatCurrency(employee.deductionAmount);
+                cellNetPay.textContent = formatCurrency(employee.netPay);
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = () => deleteEmployee(index);
+                cellAction.appendChild(deleteButton);
+            });
+        }
+
+        function clearInputs() {
+            document.getElementById("employeeName").value = "";
+            document.getElementById("daysWorked").value = "";
+            document.getElementById("dailyRate").value = "";
+            document.getElementById("deductionAmount").value = "";
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(value);
+        }
+    </script>
+
+</body>
+</html>
