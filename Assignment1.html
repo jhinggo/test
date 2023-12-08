@@ -1,0 +1,120 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #a2cffe; /* Pastel blue */
+            background-image: radial-gradient(circle, #a2cffe, #86a8e7, #7f7fd5); /* Gradient effect */
+            position: relative;
+            overflow: hidden; /* Hide overflowing stars */
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            padding: 5px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        /* Star styles */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+        /* Animation for twinkling effect */
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2> Conversion</h2>
+
+    <label for="celsius">Celsius:</label>
+    <input type="text" id="celsius" placeholder="Enter Celsius">
+
+    <button onclick="celsiusToFahrenheit()">Convert to Fahrenheit</button>
+
+    <label for="fahrenheit">Fahrenheit:</label>
+    <input type="text" id="fahrenheit" placeholder="Enter Fahrenheit">
+
+    <button onclick="fahrenheitToCelsius()">Convert to Celsius</button>
+
+    <label for="meters">Meters:</label>
+    <input type="text" id="meters" placeholder="Enter Meters">
+
+    <button onclick="metersToFeet()">Convert to Feet</button>
+
+    <label for="feet">Feet:</label>
+    <input type="text" id="feet" placeholder="Enter Feet">
+
+    <button onclick="feetToMeters()">Convert to Meters</button>
+    <br><br>
+    <a href="index.html">Back to Home Page</a>
+
+    <script>
+        function celsiusToFahrenheit() {
+            var celsius = document.getElementById("celsius").value;
+            var fahrenheit = (celsius * 9/5) + 32;
+            document.getElementById("fahrenheit").value = fahrenheit.toFixed(2);
+        }
+
+        function fahrenheitToCelsius() {
+            var fahrenheit = document.getElementById("fahrenheit").value;
+            var celsius = (fahrenheit - 32) * 5/9;
+            document.getElementById("celsius").value = celsius.toFixed(2);
+        }
+
+        function metersToFeet() {
+            var meters = document.getElementById("meters").value;
+            var feet = meters * 3.28084;
+            document.getElementById("feet").value = feet.toFixed(2);
+        }
+
+        function feetToMeters() {
+            var feet = document.getElementById("feet").value;
+            var meters = feet / 3.28084;
+            document.getElementById("meters").value = meters.toFixed(2);
+        }
+        // Function to create stars
+        function createStars() {
+            const starsContainer = document.body;
+            const numberOfStars = 50;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Call the function to create stars
+        createStars();
+    </script>
+
+</body>
+</html>
