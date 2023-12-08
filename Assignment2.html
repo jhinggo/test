@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment #2</title>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #a2cffe;
+            background-image: radial-gradient(circle, #a2cffe, #86a8e7, #7f7fd5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            margin: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Stars -->
+<script>
+    // Function to create stars
+    function createStars() {
+        const starsContainer = document.body;
+        const numberOfStars = 50;
+
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Call the function to create stars
+    createStars();
+</script>
+
+<h1>Income Tax Calculator</h1>
+
+<p>
+    <label for="income">Net Taxable Income:</label>
+    <input id="income" name="income" type="number" placeholder="Enter Net Taxable Income">
+    <button onclick="calculateTax()">Compute Income Tax</button>
+</p>
+
+<p>
+    <label for="result">Income Tax:</label>
+    <input id="result" name="result" type="number" readonly>
+</p>
+
+<p>
+    <a href="index.html">Back to Home Page</a>
+</p>
+
+<script>
+    function calculateTax() {
+        var income = document.getElementById("income").value;
+
+        // Convert income to a number
+        income = parseFloat(income);
+
+        // Check if income is a valid number
+        if (isNaN(income)) {
+            alert("Please enter a valid number for Net Taxable Income.");
+            return;
+        }
+
+        // Calculate income tax based on the provided table
+        var tax = 0;
+
+        if (income <= 250000) {
+            tax = 0;
+        } else if (income > 250000 && income <= 400000) {
+            tax = 0 + 0.2 * (income - 250000);
+        } else if (income > 400000 && income <= 800000) {
+            tax = 14000 + 0.25 * (income - 400000);
+        } else if (income > 800000 && income <= 2000000) {
+            tax = 60000 + 0.3 * (income - 800000);
+        } else if (income > 2000000 && income <= 8000000) {
+            tax = 169000 + 0.32 * (income - 2000000);
+        } else if (income > 8000000) {
+            tax = 618000 + 0.35 * (income - 8000000);
+        }
+
+        // Display the result
+        document.getElementById("result").value = tax.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
